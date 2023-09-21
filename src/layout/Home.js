@@ -6,15 +6,55 @@ const Home = () => {
     const [data, setData] = useState([-1])
     const [search, setSearch] = useState("karaj")
     const [error, setError] = useState(false)
+    const [icon, setIcon] = useState('./assets/images/new-weather-icon/day.svg')
     useEffect(() => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=${process.env.REACT_APP_API_KEY}&lang=fa`)
-            .then(data => {
-                setData(data.data)
+            .then(d => {
+                setData(d.data)
+                if (d.data.weather[0].icon === "01d") {
+                    setIcon('./assets/images/new-weather-icon/day.svg')
+                } else if (d.data.weather[0].icon === "01n") {
+                    setIcon('./assets/images/new-weather-icon/night.svg')
+                } else if (d.data.weather[0].icon === "02d") {
+                    setIcon('./assets/images/new-weather-icon/cloudy-day-3.svg')
+                } else if (d.data.weather[0].icon === "02n") {
+                    setIcon('./assets/images/new-weather-icon/cloudy-night-3.svg')
+                } else if (
+                    d.data.weather[0].icon === "03d" ||
+                    d.data.weather[0].icon === "03n" ||
+                    d.data.weather[0].icon === "04d" ||
+                    d.data.weather[0].icon === "04n"
+                ) {
+                    setIcon('./assets/images/new-weather-icon/cloudy.svg')
+                } else if (
+                    d.data.weather[0].icon === "09d" ||
+                    d.data.weather[0].icon === "09n"
+                ) {
+                    setIcon('./assets/images/new-weather-icon/rainy-5.svg')
+                } else if (
+                    d.data.weather[0].icon === "10d" ||
+                    d.data.weather[0].icon === "10n"
+                ) {
+                    setIcon('./assets/images/new-weather-icon/rainy-6.svg')
+                } else if (
+                    d.data.weather[0].icon === "11d" ||
+                    d.data.weather[0].icon === "11n"
+                ) {
+                    setIcon('./assets/images/new-weather-icon/thunder.svg')
+                } else if (
+                    d.data.weather[0].icon === "13d" ||
+                    d.data.weather[0].icon === "13n"
+                ) {
+                    setIcon('./assets/images/new-weather-icon/snowy-6.svg')
+                } else {
+                    setIcon(`http://openweathermap.org/img/wn/${d.data.weather[0].icon}@2x.png`)
+                }
                 setError(false)
             }).catch(err => {
                 setError(true)
             })
     }, [search])
+
     return (
         <div className='bg-weather bg-no-repeat bg-cover bg-center w-full h-screen'>
             <div className='w-full h-full flex flex-col items-center gap-12 p-4'>
@@ -55,7 +95,7 @@ const Home = () => {
                                         </h2>
                                         <div className='flex flex-col items-center gap-1'>
                                             <div className=''>
-                                                <img src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} width={'100%'} height={'100%'} alt={data.weather[0].description} className='w-[100px] h-[100px]' />
+                                                <img src={icon} width={'100%'} height={'100%'} alt={data.weather[0].description} className='w-[100px] h-[100px]' />
                                             </div>
                                             <div className='flex flex-col gap-1'>
                                                 <h2 className='text-neutral-800'>{data.weather[0].description}</h2>
