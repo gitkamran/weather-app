@@ -5,7 +5,7 @@ import axios from 'axios'
 const Home = () => {
     const [data, setData] = useState([-1])
     useEffect(() => {
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Karaj&units=metric&appid=${process.env.REACT_APP_API_KEY}&lang=fa`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Karaj&units=metric&appid=${process.env.API_KEY}&lang=fa`)
             .then(data => {
                 setData(data.data)
             })
