@@ -58,7 +58,7 @@ const Home = () => {
     return (
         <div className='bg-weather bg-no-repeat bg-cover bg-center w-full h-screen'>
             <div className='w-full h-full flex flex-col items-center gap-12 p-4'>
-                <SearchBox setSearch={setSearch} error={error} />
+                <SearchBox search={search} setSearch={setSearch} error={error} setData={setData} />
 
                 <div className='w-full h-full flex items-center justify-center'>
                     {data[0] === -1 ?
@@ -66,7 +66,12 @@ const Home = () => {
                         <div className='backdrop-blur-md bg-white/10 shadow-md p-8 rounded-md w-full md:w-1/3'>
                             <div className='flex flex-col gap-8'>
                                 <div className='flex items-center justify-between gap-4'>
-                                    <div className='animate-pulse w-1/2 lg:w-1/4 h-9 bg-neutral-700/90 rounded-md'></div>
+
+                                    <div className='flex flex-col items-center gap-2 w-1/2 lg:w-1/4'>
+                                        <div className='animate-pulse w-full h-10 bg-neutral-700/90 rounded-md'></div>
+                                        <div className='animate-pulse w-full h-6 bg-neutral-700/90 rounded-md'></div>
+                                    </div>
+
                                     <div className='flex flex-col items-center gap-1'>
                                         <div className='animate-pulse w-[100px] h-[100px] bg-neutral-700/90 rounded-md'></div>
                                         <div className='animate-pulse w-full h-6 bg-neutral-700/90 rounded-md'></div>
@@ -90,9 +95,16 @@ const Home = () => {
                             <div className='backdrop-blur-md bg-white/10 shadow-md rounded-md p-8 w-full md:w-1/3'>
                                 <div className='flex flex-col gap-8'>
                                     <div className='flex items-center justify-between gap-4'>
-                                        <h2 className='text-4xl text-neutral-700'>
-                                            {data.name}
-                                        </h2>
+                                        <div className='flex flex-col items-center gap-2'>
+                                            <h2 className='text-4xl text-neutral-700'>
+                                                {data.name}
+                                            </h2>
+                                            <span className='text-neutral-700'>
+                                                {
+                                                    new Date(data.dt * 1000).toLocaleDateString('fa-IR', { timeZone: 'Asia/Tehran', hour: '2-digit', minute: '2-digit' })
+                                                }
+                                            </span>
+                                        </div>
                                         <div className='flex flex-col items-center gap-1'>
                                             <div className=''>
                                                 <img src={icon} width={'100%'} height={'100%'} alt={data.weather[0].description} className='w-[100px] h-[100px]' />
