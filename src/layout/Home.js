@@ -10,13 +10,13 @@ const Home = () => {
                 setData(data.data)
             })
     }, [])
-    // console.log(data)
+    console.log(data)
     return (
         <div className='bg-weather bg-no-repeat bg-cover bg-center w-full h-screen'>
             <div className='w-full h-full flex flex-col items-center gap-12 p-4'>
                 <SearchBox />
                 <div className='w-full h-full flex items-center justify-center'>
-                    <div className='backdrop-blur-md bg-white/10 shadow-md rounded-md p-8 w-1/3'>
+                    <div className='backdrop-blur-md bg-white/10 shadow-md rounded-md p-8 w-full md:w-1/3'>
                         <div className='flex flex-col gap-8'>
                             <div>
                                 {data[0] === -1
