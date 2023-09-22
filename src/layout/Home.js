@@ -30,12 +30,12 @@ const Home = () => {
                     d.data.weather[0].icon === "09d" ||
                     d.data.weather[0].icon === "09n"
                 ) {
-                    setIcon('./assets/images/new-weather-icon/rainy-5.svg')
+                    setIcon('./assets/images/new-weather-icon/rainy-6.svg')
                 } else if (
                     d.data.weather[0].icon === "10d" ||
                     d.data.weather[0].icon === "10n"
                 ) {
-                    setIcon('./assets/images/new-weather-icon/rainy-6.svg')
+                    setIcon('./assets/images/new-weather-icon/rainy-5.svg')
                 } else if (
                     d.data.weather[0].icon === "11d" ||
                     d.data.weather[0].icon === "11n"
